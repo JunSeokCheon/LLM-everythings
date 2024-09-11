@@ -1,5 +1,14 @@
 # LLM 훈련 용어 정리
 
+## 목차
+
+1. [Instruction fine-tuning](#1-instruction-fine-tuning)
+2. [PEFT(Parameter-Efficient Fine-Tuning)](#2-peftparameter-efficient-fine-tuning)
+3. [Supervised Fine-tuning (SFT)](#3-supervised-fine-tuning-sft)
+4. [Reinforcement Learning from Human Feedback (RLHF)](#4-reinforcement-learning-from-human-feedback-rlhf)
+5. [DPO(Direct Preference Optimization)](#5-dpodirect-preference-optimization)
+6. [DAPT(Domain Adaptive Pre-Training), TAPT(Task Adaptive Pre-Training))](#6-daptdomain-adaptive-pre-training-tapttask-adaptive-pre-training)
+
 ## 1. Instruction fine-tuning
 
 - LLM 모델을 Instruction 데이터셋을 통해 fine-tuning을 진행하고 이를 통해 zero-shot 성능을 높이는 방법
@@ -8,8 +17,8 @@
 - 모델의 모든 파라미터를 변경하는 full fine-tuning 방법
 
 <br/>
-
-![alt text](image-1.png)
+ 
+![alt text](image/image-1.png)
 
 <br/>
 
@@ -44,7 +53,7 @@ catastrophic forgetting : 모델이 새로운 학습을 진행할 때에 이전�
 - Low-rank factorization 방법을 활용하여 LLM의 linear layer에 대한 업데이트를 근사화하는 기술
 - 훈련 가능한 매개 변수의 수를 크게 줄이고 모델의 최종 성능에 거의 영향을 주지 않으면서 훈련 속도 가속
 
-![alt text](image-2.png)
+![alt text](image/image-2.png)
 
 <br/>
 
@@ -53,7 +62,7 @@ catastrophic forgetting : 모델이 새로운 학습을 진행할 때에 이전�
 - task별 디테일을 학습하는 훈련 가능한 tensor(Soft prompt, 소프트 프롬프트)를 모델 입력 임베딩의 맨 앞에 붙이는 방식
 - task에 대한 프롬프트를 자연어로 작성하는 대신 task 수행에 최적화된 벡터를 사용(Prompt Engineering와 다른 기법)
 - task에 맞게 soft prompt만 변경할 수 있는 강점
-![alt text](image-3.png)
+![alt text](image/image-3.png)
 
 <br/>
 
@@ -61,7 +70,7 @@ catastrophic forgetting : 모델이 새로운 학습을 진행할 때에 이전�
 
 - Prompt Tuning과 유사한 접근 방식인데, 입력 레이어에만 프롬프트 텐서를 추가하는 대신 모든 레이어의 hidden state에 학습 가능한 파라미터를 추가한다는 차이점
 - 사전학습된 transformer의 다른 파라미터들은 모두 고정된 채 prefix의 파라미터만을 최적화
-![alt text](image-5.png)
+![alt text](image/image-5.png)
 
 <br/>
 
@@ -109,7 +118,7 @@ critic 모델 : value loss 또는 critic loss를 최소화(예측된 가치와 �
 
 <br/>
 
-![alt text](image.png)
+![alt text](image/image.png)
 
 <br/>
 
@@ -142,7 +151,7 @@ critic 모델 : value loss 또는 critic loss를 최소화(예측된 가치와 �
 
 <br/>
 
-![alt text](image-6.png)
+![alt text](image/image-6.png)
 
 <br/>
 

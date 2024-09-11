@@ -1,6 +1,13 @@
 # vLLM
 (https://blog.vllm.ai/2023/06/20/vllm.html)
 
+## 목차
+
+1. [LLM inference 특징](#llm-inference-특징)
+2. [기존 KV cahce 방법과 문제점](#기존-kv-cahce-방법과-문제점)
+3. [Paged Attention](#paged-attention)
+4. [정리](#정리)
+
 ## 핵심
 
 > **Paged Attention**을 이용하여 LLM serving에서 sota system(FT, Orca)들과 비교했을 때, 같은 수준의 latency를 유지하면서 throughput을 2~4배 향상 시킨 방법론이다.
@@ -13,7 +20,7 @@
 - token을 생성하고 끝날 때까지 기다리는 것을 반복하는 건 GPU 연산 능력을 제대로 활용하지 못하고 throughput을 저하시키는 memory-bound 현상
 - 많은 request를 하나의 batch로 묶어서 throughput을 향상시킬 수 있고, 이를 위해 GPU memory를 효율적으로 관리가 필요
 
-![alt text](image.png)
+![alt text](image/image.png)
 
 - 13B의 파라미터를 가진 모델을 A100(40GB)에 사용할 때, 할당되는 GPU memory를 주목해보자
 - Parameters는 inference 동안 static한 부분이므로 어떻게 할 수 없다.
@@ -29,7 +36,7 @@
 
 ### 문제점 1 : internal/external memory fragmentation
 
-![alt text](image-1.png)
+![alt text](image/image-1.png)
 
 - 예측 불가능하기 때문에 사전에 물리적으로 인접한 최대 길이의 공간을 할당
 - 여기서 fragmentation은 internal fragmentation, external fragmentation, reserved으로 분리
@@ -45,7 +52,7 @@
 실제로 생성에 사용되는 공간  
 만약 생성될 길이가 1000이라고 가정했을 때, 첫번째 iteration에는 1개의 공간만 필요하고 나머지 999개는 사용되지 않으니 비효율적
 
-![alt text](image-2.png)
+![alt text](image/image-2.png)
 
 - 현재 사용되는 시스템에서 GPU memory는 20~40% 밖에 사용하고 있지 않다. (vLLM 제외)
 
@@ -69,7 +76,7 @@
 2. 모든 블록이 같은 크기를 가져서 external fragmentation 감소
 3. block 단위로 저장되기 때문에 메로리 공유 가능
 
-![alt text](image-3.png)
+![alt text](image/image-3.png)
 
 ---
 
